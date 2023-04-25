@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${errorTitle}"/>
+</head>
+<body>
+<div align="center">
+    <br>
+    <br>
+    <h2 style="color:red" th:text="${errorCaption}"/>
+    <h1 th:text="${errorMsg}"/>
+    <br>
+    <form>
+        <input type="button" value="Назад" onclick="history.back()">
+    </form>
+</div>
+</body>
+</html>

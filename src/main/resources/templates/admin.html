@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {border-collapse: collapse; text-align: center}
+        th {background: #ddd; padding: 5px; border: 1px solid black}
+        td {padding: 5px; border: 1px solid black}
+    </style>
+    <title>Пользователи</title>
+</head>
+<body>
+<div align="center">
+    <h2>Пользователи</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>e-mail</th>
+            <th>Пароль</th>
+            <th>Роль</th>
+            <th colspan="2"><em>действие</em></th>
+        </tr>
+        <tr th:each="user:${userList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.getRoles().toString()}"></td>
+            <td>
+                <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.id})}">
+                    <input type="submit" value="Изменить"/>
+                </form>
+            </td>
+            <td>
+                <form th:method="DELETE" th:action="@{/admin/edit/{id}(id=${user.id})}">
+                    <input type="submit" value="Удалить"/></form>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5" style="border: 0px" align="left">
+                <form th:action="@{/logout}" th:method="POST">
+                    <input type="submit" value="Выход" />
+                </form>
+            </td>
+            <td colspan="2" style="border: 0px">
+                <form th:method="GET" th:action="'/admin/new'">
+                    <input type="submit" value="Новый пользователь"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
