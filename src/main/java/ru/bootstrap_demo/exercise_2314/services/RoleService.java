@@ -5,4 +5,6 @@ import java.util.List;
 
 public interface RoleService {
     List<Role> allRoles();
+
+    void saveRole(Role roleAdmin);
 }

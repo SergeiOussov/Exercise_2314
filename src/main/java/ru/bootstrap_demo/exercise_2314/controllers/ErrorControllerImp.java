@@ -13,17 +13,17 @@ public class ErrorControllerImp implements ErrorController {
     @RequestMapping("/error")
     public ModelAndView handleError(HttpServletRequest request) {
         ModelAndView errorPage = new ModelAndView("errorpage");
-        String errorTitle = "Ошибка";
-        String errorCaption = "Ошибка";
-        String errorMsg = "При выполнении запроса к серверу произошла ошибка";
+        String errorTitle = "Error";
+        String errorCaption = "Error";
+        String errorMsg = "An error occurred while making a request to the server";
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
             if (statusCode == HttpStatus.FORBIDDEN.value()) {
-                errorMsg = "У Вас нет прав на просмотр этой страницы";
+                errorMsg = "You are not authorized to view this page";
             }
             else if (statusCode == HttpStatus.NOT_FOUND.value()) {
-                errorMsg = "Страница не найдена";
+                errorMsg = "Page not found";
             }
             errorCaption += " (" + statusCode + ")";
         }

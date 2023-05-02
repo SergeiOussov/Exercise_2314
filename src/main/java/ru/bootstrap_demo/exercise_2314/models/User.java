@@ -5,29 +5,43 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "secusers")
+@Table(name = "users")
 public class User  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "name")
-    private String username;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "age")
+    private Integer age;
     @Column(name = "e_mail")
     private String email;
     @Column(name = "password")
     private String password;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "secusers_roles",
+            name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id")
     )
     private Set<Role> roles;
 
     public User() {}
+
+    public User(String firstName, String lastName, Integer age, String email, String password, Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public long getId() {
         return id;
@@ -37,9 +51,18 @@ public class User  implements UserDetails {
         this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getFirstName() { return firstName; }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
+
+    public String getLastName() { return lastName; }
+
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public Integer getAge() { return age; }
+
+    public void setAge(Integer age) { this.age = age; }
 
     public String getEmail() {
         return email;
@@ -64,7 +87,7 @@ public class User  implements UserDetails {
     public String getPassword() { return password; }
 
     @Override
-    public String getUsername() { return username; }
+    public String getUsername() { return email; }
 
     @Override
     public boolean isAccountNonExpired() { return true; }
@@ -82,10 +105,16 @@ public class User  implements UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public String getUserRolesAsString() {
+        return roles.stream().map(Role::toString).collect(Collectors.joining(" "));
     }
 }
