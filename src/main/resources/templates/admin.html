@@ -111,7 +111,7 @@
                                                                            name="id" disabled th:value="${user.id}">
                                                                 </div>
                                                                 <div class="mt-3">
-                                                                    <label for="editfirstname" class="fw-bold">Last name</label>
+                                                                    <label for="editfirstname" class="fw-bold">First name</label>
                                                                     <input type="text" class="form-control form-control-sm" id="editfirstname"
                                                                            name="firstName" placeholder="First name" th:value="${user.firstName}">
                                                                 </div>
@@ -189,7 +189,7 @@
                                                                            name="id" disabled th:value="${user.id}">
                                                                 </div>
                                                                 <div class="mt-3">
-                                                                    <label for="deletefirstname" class="fw-bold">Last name</label>
+                                                                    <label for="deletefirstname" class="fw-bold">First name</label>
                                                                     <input type="text" class="form-control form-control-sm" id="deletefirstname"
                                                                            name="firstName" disabled
                                                                            placeholder="First name" th:value="${user.firstName}">
@@ -261,7 +261,7 @@
                             <div class="container col-md-4 text-center">
                                 <form th:action="@{/admin}" th:method="POST" th:object="${newuser}">
                                     <div class="mt-2">
-                                        <label for="newfirstname" class="fw-bold">Last name</label>
+                                        <label for="newfirstname" class="fw-bold">First name</label>
                                         <input type="text" class="form-control form-control-sm" id="newfirstname"
                                                name="firstname" placeholder="First name" th:field="*{firstName}">
                                     </div>
